@@ -1,0 +1,100 @@
+// There are only three phases in Swaps life: Sleep, Play and Study. Also, there are two types of emotions Swaps experiences: Happy and Sad. Each phase of his life brings either kind of emotions.
+// The sleep and the play phase makes Swaps happy whereas the study phase makes him sad. Quite obvious, isn't it? But we know that life isn't that great, one cannot be happy all the time.
+// Swaps, being a very sensitive guy, doesn't like to mix his emotions in a particular day. So each day, he is in exactly one of the three phases.
+// Given N which denotes the number of days and K which denotes the exact number of days Swaps needs to be happy out of these N days, can you tell him in how many ways can he achieve this? Since the output value can be very large, take modulo with 1000000007(10^9+7)
+// Input:
+// The first line of the input contains T, denoting the number of test cases.
+
+// The next T lines contain two space-separated integers N and K.
+// Output:
+// For each test-case, output a single integer, the number of ways modulo 1000000007(10^9+7).
+// Constraints:
+// 1 ≤ T ≤ 10^5
+// 1 ≤ N ≤ 10^6
+// 1 ≤ K ≤ 10^6
+// K ≤ N
+// Sample Input :
+// 3
+// 1 1
+// 2 1
+// 3 2
+// Sample Output:
+// 2
+// 4
+// 12
+// Explanation
+// In the first test case, he needs to be happy on Day 1. Hence, answer is 2 (He can either play or sleep).
+
+// In the second test case, he can be happy either on Day 1 or Day 2. So number of ways = 4.
+
+
+
+
+#include <bits/stdc++.h>
+#define FIOS ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define endl "\n"
+#define sc(a) scanf("%d ",&a);
+#define ssc(a,b) scanf("%d %d ",&a,&b);
+#define sssc(a,b,c) scanf("%d %d %d ",&a,&b,&c);
+#define mp(a,b) make_pair(a,b)
+#define pb(x) push_back(x)
+#define all(a) a.begin(),a.end()
+#define forn(i,n) for(int i=0;i<n;i++)
+#define forq(i,q,n) for(int i=q;i<n;i++)
+#define form(i,n) for(int i=n;i>=0;i--)
+#define forp(i,q,n) for(int i=q;i>=n;i--)
+#define fi first
+#define se second
+#define RT return 0;
+#define INF 1000000010
+#define MOD 1000000007
+#define MAXN 1000010
+using namespace std;
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pii;
+typedef pair<int,pii> tii;
+typedef pair<ll,ll> pll;
+typedef vector<pii> vii;
+typedef vector<ll> vl;
+typedef vector<pll> vll;
+typedef double du;
+typedef long double ld;
+typedef vector<vi> vvi;
+typedef vector<vl> vvl;
+ 
+ll fac[MAXN];
+ 
+ll pot(ll b, ll e){
+	ll r=1;
+ 
+	for(;e;e>>=1){
+		if(e&1)r=(r*b)%MOD;
+		b=(b*b)%MOD;
+	}
+ 
+	return r;
+}
+ 
+ll C(ll m, ll n){
+	ll u=(pot(fac[n],MOD-2)*pot(fac[m-n],MOD-2))%MOD;
+	return (u*fac[m])%MOD;
+}
+ 
+int main(){
+	fac[0]=1;
+	forq(i,1,MAXN)fac[i]=(i*fac[i-1])%MOD;
+ 
+	int t;
+	sc(t)
+ 
+	while(t--){
+		int n,k;
+		ssc(n,k)
+ 
+		printf("%lld\n",(pot(2,k)*C(n,k))%MOD);
+	}
+ 
+ 
+	RT
+}
